@@ -1,25 +1,35 @@
+import { PokemonsResponse, SimplePokemon, PokemonCard } from "@/app/pokemons";
 
 
-const getPokemons = async (limit = 20, offset = 0) => {
-    const resp = await fetch(
+
+const getPokemons = async (limit = 20, offset = 0): Promise<SimplePokemon[]> => {
+    const res = await fetch(
         `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
     );
 
-    if (!resp.ok) {
-        throw new Error("Error al obtener los pokémon");
-    }
+    const data: PokemonsResponse = await res.json();
 
-    const data = await resp.json();
-    return data;
+    const pokemons = data.results.map((pokemon) => ({
+        id: Number(pokemon.url.split('/').at(-2)!),
+        name: pokemon.name,
+    }))
+
+    return pokemons;
 };
 
 export default async function PokemonPage() {
 
-    const pokemons = await getPokemons();
+    const pokemons = await getPokemons(151);
 
     return (
-        <div>
-            <h1>{JSON.stringify(pokemons)}</h1>
+        <div className="flex flex-col">
+            <div className="flex flex-wrap gap-10 items-center justify-center">
+                {
+                    pokemons.map((pokemon) => (
+                        <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                    ))
+                }
+            </div>
         </div>
     )
 }
