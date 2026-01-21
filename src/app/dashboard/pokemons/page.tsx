@@ -23,6 +23,16 @@ export default async function PokemonPage() {
 
     return (
         <div className="flex flex-col">
+            <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+                <h2 className="text-5xl sm:text-6xl font-extrabold tracking-tight">
+                    Listado de Pokémon
+                </h2>
+
+                <span className="mt-3 text-lg sm:text-xl font-medium text-gray-500">
+                    Generación I · Renderizado estático
+                </span>
+            </div>
+
             <div className="flex flex-wrap gap-10 items-center justify-center">
                 {
                     pokemons.map((pokemon) => (
