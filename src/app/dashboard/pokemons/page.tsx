@@ -1,4 +1,4 @@
-import { PokemonsResponse, SimplePokemon, PokemonCard } from "@/app/pokemons";
+import { PokemonGrid, PokemonsResponse, SimplePokemon } from "@/app/pokemons";
 
 
 
@@ -33,13 +33,7 @@ export default async function PokemonPage() {
                 </span>
             </div>
 
-            <div className="flex flex-wrap gap-10 items-center justify-center">
-                {
-                    pokemons.map((pokemon) => (
-                        <PokemonCard key={pokemon.id} pokemon={pokemon} />
-                    ))
-                }
-            </div>
+            <PokemonGrid pokemons={pokemons} />
         </div>
     )
 }
