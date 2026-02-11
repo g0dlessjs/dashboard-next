@@ -1,5 +1,6 @@
 import { Pokemon } from "@/pokemons";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 interface Props {
     params: Promise<{ id: string }>;
@@ -16,11 +17,17 @@ export async function generateMetadata({ params }: Props) {
 
 
 const getPokemon = async (id: string): Promise<Pokemon> => {
-    const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
-        cache: 'force-cache', // Opcional: para que Next.js lo cachee
-    });
-    const data: Pokemon = await resp.json();
-    return data;
+
+    try {
+        const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
+            cache: 'force-cache', // Opcional: para que Next.js lo cachee
+        });
+        const data: Pokemon = await resp.json();
+        return data;
+    } catch (error) {
+        notFound();
+    }
+
 }
 
 
@@ -221,8 +228,8 @@ export default async function PokemonPage(props: Props) {
                                 <div
                                     key={ability.ability.name}
                                     className={`relative p-8 rounded-[2rem] border transition-all duration-500 hover:-translate-y-1 ${ability.is_hidden
-                                            ? 'border-white/10 bg-white/5 hover:bg-white/10'
-                                            : 'border-slate-700 bg-slate-800/50 hover:bg-slate-800'
+                                        ? 'border-white/10 bg-white/5 hover:bg-white/10'
+                                        : 'border-slate-700 bg-slate-800/50 hover:bg-slate-800'
                                         }`}
                                 >
                                     <div className="flex justify-between items-center mb-3">
