@@ -39,41 +39,66 @@ export const Sidebar = () => {
   return (
     <div
       id="menu"
-      style={{ width: "400px" }}
-      className="bg-gray-900 min-h-screen z-10 text-slate-300 w-64  left-0 overflow-y-scroll"
+      style={{ width: "280px" }}
+      className="bg-[#0f172a] min-h-screen z-10 text-slate-300 left-0 overflow-y-auto border-r border-white/5 flex flex-col"
     >
-      <div id="logo" className="my-4 px-6">
-        <h1 className="flex items-center text-lg md:text-2xl font-bold text-white">
-          <IoLogoReact className="mr-2" />
+      <div id="logo" className="mt-8 mb-4 px-8">
+        <h1 className="flex items-center text-2xl font-black tracking-tight text-white group cursor-default">
+          <div className="bg-blue-600 p-1.5 rounded-lg mr-3 group-hover:bg-blue-500 transition-colors shadow-lg shadow-blue-500/20">
+            <IoLogoReact size={24} className="text-white animate-spin-slow" />
+          </div>
           <span>Dash</span>
-          <span className="text-blue-500">8</span>.
+          <span className="text-blue-500">8</span>
+          <span className="text-blue-600">.</span>
         </h1>
-        <p className="text-slate-500 text-sm">
-          Manage your actions and activities
+        <p className="text-slate-500 text-xs mt-1 font-medium tracking-wide uppercase">
+          Enterprise Solution
         </p>
       </div>
 
-      <div id="profile" className="px-6 py-10">
-        <p className="text-slate-500">Welcome back,</p>
-        <a href="#" className="inline-flex space-x-2 items-center">
-          <span>
+      <div id="profile" className="px-8 py-8">
+        <div className="flex flex-col space-y-4">
+          <div className="relative group w-fit">
+            <div className="absolute -inset-0.5 bg-linear-to-r from-blue-600 to-cyan-500 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
             <Image
-              className="rounded-full w-8 h-8"
+              className="relative rounded-full w-12 h-12 object-cover border-2 border-slate-800"
               src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=128&q=80"
               alt="User avatar"
-              width={50}
-              height={50}
+              width={100}
+              height={100}
             />
-          </span>
-          <span className="text-sm md:text-base font-bold">Juan</span>
-        </a>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
+              Welcome back,
+            </span>
+            <span className="text-lg font-bold text-slate-100">
+              Juan Carlos
+            </span>
+          </div>
+        </div>
       </div>
 
-      <div id="nav" className="w-full px-6">
+      <nav id="nav" className="flex-1 px-4 space-y-1">
+        <div className="px-4 mb-4">
+          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">
+            Main Menu
+          </span>
+        </div>
         {menuItem.map((item) => (
           <SidebarMenuItem key={item.path} {...item} />
         ))}
-      </div>
+      </nav>
+
+      {/* <div className="px-8 py-6 mt-auto border-t border-white/5">
+        <div className="bg-slate-800/50 rounded-xl p-4 flex items-center justify-between group cursor-pointer hover:bg-slate-800 transition-colors">
+          <div className="flex flex-col">
+            <span className="text-xs text-slate-400 font-medium">Plan</span>
+            <span className="text-sm text-white font-bold">Pro Member</span>
+          </div>
+          <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+        </div>
+      </div> */}
     </div>
   );
 };
