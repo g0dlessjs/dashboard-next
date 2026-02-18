@@ -1,11 +1,4 @@
-import { SimpleWidget } from "@/components";
-import {
-  Calculator,
-  LayoutGrid,
-  LucideIcon,
-  Pocket,
-  ShoppingBag,
-} from "lucide-react";
+import { SimpleWidget, WidgetGrid } from "@/components";
 
 export default function MainPage() {
   return (
@@ -16,14 +9,7 @@ export default function MainPage() {
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-        <SimpleWidget
-          title="151"
-          subTitle="Pokémons disponibles"
-          label="Catálogo"
-          href="/dashboard/pokemons"
-        />
-      </div>
+      <WidgetGrid />
     </div>
   );
 }

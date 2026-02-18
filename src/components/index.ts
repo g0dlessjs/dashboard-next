@@ -1,3 +1,5 @@
-export { Sidebar } from "./Sidebar";
+export { Sidebar } from "./sidebar/Sidebar";
 export { SidebarMenuItem } from "./SidebarMenuItem";
-export { SimpleWidget } from "./SimpleWidget";
+
+export { SimpleWidget } from "./dashboard/SimpleWidget";
+export { WidgetGrid } from "./dashboard/WidgetGrid";
