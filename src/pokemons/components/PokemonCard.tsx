@@ -3,7 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { SimplePokemon } from "../interfaces/simple-pookemon";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
-import { useAppSelector } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { toggleFavorite } from "@/store/pokemons/pokemons";
 
 interface Props {
   pokemon: SimplePokemon;
@@ -12,8 +13,11 @@ interface Props {
 export const PokemonCard = ({ pokemon }: Props) => {
   const { id, name } = pokemon;
   const isFavorite = useAppSelector((state) => !!state.pokemons[id]);
+  const dispatch = useAppDispatch();
 
-  console.log(isFavorite);
+  const onToggleFavorite = () => {
+    dispatch(toggleFavorite(pokemon));
+  };
 
   return (
     <div className="mx-auto w-64 relative group">
@@ -58,7 +62,10 @@ export const PokemonCard = ({ pokemon }: Props) => {
             </span>
           </div>
 
-          <div className="text-gray-400 transition-colors cursor-pointer">
+          <div
+            onClick={onToggleFavorite}
+            className="text-gray-400 transition-colors cursor-pointer"
+          >
             {isFavorite ? (
               <IoHeart className="w-6 h-6 text-red-500" />
             ) : (
