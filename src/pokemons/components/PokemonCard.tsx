@@ -1,7 +1,9 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { SimplePokemon } from "../interfaces/simple-pookemon";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import { useAppSelector } from "@/store";
 
 interface Props {
   pokemon: SimplePokemon;
@@ -9,6 +11,9 @@ interface Props {
 
 export const PokemonCard = ({ pokemon }: Props) => {
   const { id, name } = pokemon;
+  const isFavorite = useAppSelector((state) => !!state.pokemons[id]);
+
+  console.log(isFavorite);
 
   return (
     <div className="mx-auto w-64 relative group">
@@ -17,7 +22,7 @@ export const PokemonCard = ({ pokemon }: Props) => {
         {/* Top Section - Image Area (Neutral Dark Background) */}
         <div className="h-64 bg-zinc-700 relative flex items-center justify-center p-4">
           {/* Removed Red Gradient for better contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"></div>
+          <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/20"></div>
 
           {/* Large Image */}
           <div className="relative z-10 w-48 h-48 transition-transform duration-300 group-hover:scale-110">
@@ -53,13 +58,28 @@ export const PokemonCard = ({ pokemon }: Props) => {
             </span>
           </div>
 
-          <div className="text-gray-400 hover:text-red-500 transition-colors cursor-pointer">
-            <IoHeart className="w-6 h-6" />
+          <div className="text-gray-400 transition-colors cursor-pointer">
+            {isFavorite ? (
+              <IoHeart className="w-6 h-6 text-red-500" />
+            ) : (
+              <IoHeartOutline className="w-6 h-6" />
+            )}
           </div>
         </div>
 
         {/* Action Section */}
-        <div className="border-t border-gray-100 p-4 bg-gray-50/50">
+        <div className=" border-t border-gray-100 p-4 bg-gray-50/50">
+          <p>
+            {isFavorite ? (
+              <span className=" flex items-end mb-2  justify-center text-red-500 text-xs  font-mono">
+                Es favorito
+              </span>
+            ) : (
+              <span className=" flex items-end mb-2  justify-center text-gray-400 text-xs  font-mono">
+                No es favorito
+              </span>
+            )}
+          </p>
           <Link
             href={`/dashboard/pokemon/${name}`}
             className="block w-full py-2.5 px-4 rounded-xl bg-zinc-800 text-white text-center text-sm font-semibold hover:bg-zinc-700 transition-colors duration-200 shadow-sm"
