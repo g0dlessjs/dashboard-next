@@ -1,4 +1,9 @@
-import { PokemonGrid, PokemonsResponse, SimplePokemon } from "@/pokemons";
+import {
+  FavoritePokemons,
+  PokemonGrid,
+  PokemonsResponse,
+  SimplePokemon,
+} from "@/pokemons";
 
 // const getPokemons = async (
 //   limit = 20,
@@ -38,7 +43,7 @@ export default async function PokemonPage() {
         </span>
       </div>
 
-      <PokemonGrid pokemons={[]} />
+      <FavoritePokemons />
     </div>
   );
 }
