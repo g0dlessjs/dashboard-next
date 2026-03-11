@@ -5,7 +5,9 @@ import PokemonGrid from "./PokemonGrid";
 import { IoHeartOutline } from "react-icons/io5";
 
 const FavoritePokemons = () => {
-  const favoritePokemonsMap = useAppSelector((state) => state.pokemons);
+  const favoritePokemonsMap = useAppSelector(
+    (state) => state.pokemons.favorites,
+  );
   const favoritePokemons = Object.values(favoritePokemonsMap);
 
   return (
